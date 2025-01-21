@@ -322,7 +322,7 @@ button:hover {
     }
 
     .ProductDetails{
-        flex-direction: column !important;
+        flex-wrap: wrap;
     }
 
 }
