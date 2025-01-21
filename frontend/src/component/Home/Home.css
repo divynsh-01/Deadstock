@@ -88,6 +88,10 @@
     font-size: 1.7vmax;
   }
 
+  .headlogo{
+    zoom:2.5;
+  }
+
   .productCard > div {
     margin: 0vmax;
     display: block;
