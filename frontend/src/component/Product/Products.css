@@ -141,3 +141,10 @@
   align-items: center;
   zoom: 0.5;
 }
+
+
+@media screen and (max-width: 600px) {
+    .headlogo{
+        zoom: 2.5 !important;
+    }
+}
