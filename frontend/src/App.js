@@ -1,56 +1,18 @@
-import './App.css';
-import Header from "./component/layout/Header/Header.js";
-import Footer from "./component/layout/Footer/Footer.js";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import React, { useState } from 'react';
-import Home from './component/Home/Home.js';
-import ProductDetails from './component/Product/ProductDetails.js';
-import Products from './component/Product/Products.js';
-import Contact from './component/Contact/Contact.js';
-import Search from './component/Product/Search.js';
-import LoginSignUp from './component/User/LoginSignUp.js';
-import AboutUs from './component/About/AboutUs.js';
-import store from "./store.js";
-import { loadUser } from './actions/userAction.js';
-import UserOptions from "./component/layout/Header/UserOptions.js";
-import { useSelector } from 'react-redux';
-import Profile from "./component/User/Profile.js";
-import ProtectedRoute from './component/Route/ProtectedRoute.js';
-import UpdateProfile from './component/User/UpdateProfile.js';
-import UpdatePassword from './component/User/UpdatePassword.js';
-import ForgotPassword from './component/User/ForgotPassword.js';
-import ResetPassword from './component/User/ResetPassword.js';
-import Cart from './component/Cart/Cart.js';
-import Shipping from './component/Cart/Shipping.js';
-import ConfirmOrder from './component/Cart/ConfirmOrder.js';
-import Payment from './component/Cart/Payment.js';
-import axios from 'axios';
-import { Elements } from '@stripe/react-stripe-js';
-import { loadStripe } from '@stripe/stripe-js';
-import OrderSuccess from './component/Cart/OrderSuccess.js';
-import MyOrders from "./component/Order/MyOrders.js";
-import OrderDetails from "./component/Order/OrderDetails.js"
-import DashBoard from "./component/Admin/DashBoard.js"
-import ProductList from "./component/Admin/ProductList.js"
-import NewProduct from './component/Admin/NewProduct.js';
-import UpdateProduct from './component/Admin/UpdateProduct.js';
-import OrderList from './component/Admin/OrderList.js';
-import ProcessOrder from './component/Admin/ProcessOrder.js';
-import UsersList from './component/Admin/UsersList.js';
-import UpdateUser from './component/Admin/UpdateUser.js';
-import ProductReviews from './component/Admin/ProductReviews.js';
-import NotFound from './component/NotFound/NotFound.js'; 
+import React, { useState, useEffect } from 'react';
+// ...other imports...
 
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
   const [stripeApiKey, setStripeApiKey] = useState("");
+  const [loading, setLoading] = useState(true);  // Added loading state
 
   async function getStripeApiKey() {
     const { data } = await axios.get("/api/v1/stripeapikey");
     setStripeApiKey(data.stripeApiKey);
+    setLoading(false);  // Set loading to false after fetching the stripe key
   }
 
-  React.useEffect(() => {
+  useEffect(() => {
     store.dispatch(loadUser());
     getStripeApiKey();
   }, []);
@@ -112,7 +74,8 @@ function App() {
           />
         )}
 
-        <Route path="*" element={<NotFound />} />
+        {/* Show NotFound only after loading is complete */}
+        <Route path="*" element={loading ? <div>Loading...</div> : <NotFound />} />
       </Routes>
 
       <Footer />
