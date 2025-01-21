@@ -1,0 +1,74 @@
+/* Base styling for the Contact page */
+.cc {
+    min-height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f4f4f9;
+    padding: 40px 20px;
+  }
+  
+  /* Contact container */
+  .contact-container {
+    max-width: 600px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    animation: slideUp 1s ease-out;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .contact-container h2 {
+    font-family: 'Arial', sans-serif;
+    font-size: 2rem;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  /* Contact details */
+  .contact-details {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    color: #555;
+    line-height: 1.6;
+  }
+  
+  .contact-details p {
+    margin-bottom: 10px;
+  }
+  
+  .contact-details strong {
+    font-weight: bold;
+  }
+  
+  /* Slide-up effect for the contact container */
+  @keyframes slideUp {
+    0% {
+      transform: translateY(30px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  /* Responsiveness for mobile devices */
+  @media (max-width: 768px) {
+    .contact-container {
+      padding: 15px;
+    }
+  
+    .contact-container h2 {
+      font-size: 1.6rem;
+    }
+  
+    .contact-details p {
+      font-size: 14px;
+    }
+  }
+  

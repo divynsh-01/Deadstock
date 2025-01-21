@@ -1,0 +1,93 @@
+/* Payment.css */
+
+.paymentContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    background: #f8f9fa;
+    min-height: 100vh;
+  }
+  
+  .paymentForm {
+    background: #ffffff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .paymentForm > div {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border: 1px solid #dcdcdc;
+    padding: 0.75rem;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+  
+  .paymentInput {
+    flex: 1;
+    font-size: 1rem;
+    border: none;
+    outline: none;
+    background: transparent;
+  }
+  
+  .paymentFormBtn {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    color: #ffffff;
+    background: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .paymentFormBtn:hover {
+    background: #0056b3;
+  }
+  
+  .paymentFormBtn:disabled {
+    background: #cccccc;
+    cursor: not-allowed;
+  }
+  
+  /* Typography styles */
+  .paymentForm > Typography {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333333;
+    text-align: center;
+  }
+  
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .paymentForm {
+      padding: 1.5rem;
+    }
+  
+    .paymentForm > div {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .paymentInput {
+      width: 100%;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .paymentForm {
+      width: 90%;
+    }
+  }
+  

@@ -1,0 +1,104 @@
+.divCont {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centers child elements horizontally */
+  justify-content: center; /* Centers child elements vertically if needed */
+}
+
+.homeHeading {
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-top: 20px;
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+}
+.homeHeading {
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+
+.headlogo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.horizontal-rule {
+  width: 50%; /* Adjust this value to set the width of the line */
+  margin: 0 auto; /* Center the line */
+  border: 0;
+  border-top: 2px solid black; /* Change the color and thickness of the line */
+  margin-bottom: 20px; /* Adjust spacing below the line */
+}
+
+.containere {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.productCard {
+  width: 16vmax;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: rgb(48, 48, 48);
+  margin: 2vmax;
+  transition: all 0.5s;
+  padding-bottom: 0.5vmax;
+  box-sizing: border-box; /* Ensures padding doesn't affect width */
+  height: auto; /* Allow the height to adjust based on content */
+}
+
+.productCard > img {
+  width: 100%; /* Ensures image fits the width of the container */
+  height: 16vmax; /* Fix height to match card width */
+  object-fit: cover; /* Ensures the image fills the box without distortion */
+}
+
+.productCard > div {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.productCardRev{
+  margin: 0.5vmax;
+  font-size: 1vmax;
+}
+
+.productCard > p {
+  font-size: 1.2vmax;
+}
+
+.productCard > span {
+  color: tomato;
+}
+
+.productCard:hover {
+  box-shadow: 0 0 5px rgba(15, 15, 15, 0.26);
+  transform: translateY(-1vmax);
+}
+
+@media screen and (max-width: 600px) {
+  .productCard > p {
+    font-size: 1.7vmax;
+  }
+
+  .productCard > div {
+    margin: 0vmax;
+    display: block;
+  }
+
+  .productCard > span {
+    font-size: 1.5vmax;
+  }
+
+  .productCard > div > span {
+    margin: 0 0.5vmax;
+    font: 300 1vmax "Roboto";
+  }
+}

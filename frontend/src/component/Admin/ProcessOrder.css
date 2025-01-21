@@ -1,0 +1,20 @@
+.newProductContainer{
+    padding: 0px;
+}
+
+.nm{
+    padding: 20px;
+}
+
+.confirmCartItems{
+    padding: 0px;
+}
+
+.updateOrderForm{
+    padding: 20px;
+    margin-top: 10px;
+}
+
+.updateOrderForm button{
+    margin-top: 10px;
+}

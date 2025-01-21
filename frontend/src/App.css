@@ -1,0 +1,9 @@
+/* App.css */
+* {
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  body{
+    background-color: rgba(var(--bs-light-rgb), var(--bs-bg-opacity)) !important;
+
+  }
