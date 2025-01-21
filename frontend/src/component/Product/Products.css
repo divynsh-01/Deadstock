@@ -147,4 +147,8 @@
     .headlogo{
         zoom: 2.5 !important;
     }
+    .category-link{
+    font-size: 13px;
+    margin: 12px 0;
+  }
 }
