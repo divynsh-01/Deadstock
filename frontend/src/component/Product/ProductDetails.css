@@ -321,4 +321,8 @@ button:hover {
         margin-top: 1vmax;
     }
 
+    .ProductDetails{
+        flex-direction: column !important;
+    }
+
 }
