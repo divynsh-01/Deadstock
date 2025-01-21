@@ -1,0 +1,195 @@
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9;
+  }
+  
+  /* Product Reviews Container */
+  .productReviewsContainer {
+    width: 100%;
+    max-width: 1200px;
+    margin: 40px auto;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    overflow-x: auto;
+  }
+  
+  /* Form Styles */
+  .productReviewsForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  .productReviewsFormHeading {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .productReviewsForm input {
+    width: 100%;
+    max-width: 400px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+  
+  .productReviewsForm input:focus {
+    outline: none;
+    border-color: #0d6efd;
+    box-shadow: 0 0 4px rgba(13, 110, 253, 0.3);
+  }
+  
+  #createProductBtn {
+    background-color: #0d6efd;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  #createProductBtn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  #createProductBtn:hover:not(:disabled) {
+    background-color: #084298;
+  }
+  
+  /* Table Styles */
+  .reviewsTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 16px;
+  }
+  
+  .reviewsTable th,
+  .reviewsTable td {
+    border: 1px solid #ddd;
+    padding: 12px 16px;
+    text-align: center;
+  }
+  
+  .reviewsTable th {
+    background-color: #0d6efd;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+  }
+  
+  .reviewsTable td {
+    background-color: #f9f9f9;
+    color: #333;
+  }
+  
+  .reviewsTable tr:nth-child(even) td {
+    background-color: #f1f1f1;
+  }
+  
+  .reviewsTable tr:hover td {
+    background-color: #e9e9e9;
+  }
+  
+  .reviewsTable .greenColor {
+    color: #28a745;
+    font-weight: bold;
+  }
+  
+  .reviewsTable .redColor {
+    color: #e74c3c;
+    font-weight: bold;
+  }
+  
+  .reviewsTable button {
+    background: none;
+    border: none;
+    color: #0d6efd;
+    font-size: 16px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+  
+  .reviewsTable button:hover {
+    color: #e74c3c;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 1200px) {
+    .productReviewsContainer {
+      padding: 15px;
+    }
+  
+    .productReviewsFormHeading {
+      font-size: 26px;
+    }
+  
+    .reviewsTable th,
+    .reviewsTable td {
+      font-size: 14px;
+      padding: 10px;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .productReviewsContainer {
+      padding: 10px;
+    }
+  
+    .productReviewsFormHeading {
+      font-size: 22px;
+    }
+  
+    .reviewsTable {
+      font-size: 14px;
+    }
+  
+    .reviewsTable th,
+    .reviewsTable td {
+      padding: 8px 10px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .productReviewsContainer {
+      padding: 10px;
+      width: 100%;
+    }
+  
+    .productReviewsFormHeading {
+      font-size: 20px;
+    }
+  
+    .reviewsTable {
+      font-size: 12px;
+    }
+  
+    .reviewsTable th,
+    .reviewsTable td {
+      padding: 6px 8px;
+    }
+  }
+  
+  /* Ensure table is scrollable on smaller screens */
+  @media (max-width: 767px) {
+    .reviewsTable {
+      min-width: 600px;
+    }
+  }
+  

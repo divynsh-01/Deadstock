@@ -1,0 +1,125 @@
+main {
+  background: #f4f4f9;
+  padding: 40px 20px;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+#description {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  animation: slideUp 1s ease-out;
+}
+
+#description h2 {
+  font-family: 'Arial', sans-serif;
+  font-size: 1.8rem;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+#description p {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+#description p:last-of-type {
+  margin-bottom: 0;
+}
+
+#impact {
+  margin-top: 40px;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  animation: zoomIn 1s ease-out;
+}
+
+#impact h2 {
+  font-family: 'Arial', sans-serif;
+  font-size: 1.8rem;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+#impact ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 20px 0;
+}
+
+#impact ul li {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+#impact ul li strong {
+  color: #2c3e50;
+}
+
+@keyframes zoomIn {
+  0% {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  0% {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  main {
+    padding: 20px;
+  }
+
+  #logoHead img {
+    width: 120px;
+  }
+
+  #description, #impact {
+    padding: 15px;
+  }
+
+  #description h2, #impact h2 {
+    font-size: 1.5rem;
+  }
+
+  #description p, #impact ul li {
+    font-size: 14px;
+  }
+}

@@ -1,0 +1,22 @@
+.speedDialWrapper {
+  position: fixed;
+  top: 8%;
+  right: 20px;
+  z-index: 1000;
+}
+
+.speedDialIcon {
+  width: 100%; /* Full width of the container */
+  height: 100%; /* Full height of the container */
+  max-width: 56px; /* Limit maximum width */
+  max-height: 56px; /* Limit maximum height */
+  border-radius: 50%; /* Make the image circular */
+  object-fit: cover; /* Ensure proper fit without distortion */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+}
+
+/* Ensure Backdrop covers the whole screen */
+.MuiBackdrop-root {
+  background-color: rgba(0, 0, 0, 0.5); /* Dark overlay */
+  z-index: 999; /* Make sure it's above other components */
+}
