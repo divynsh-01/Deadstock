@@ -19,6 +19,17 @@
   margin-bottom: 10px;
 }
 
+.productCard > img{
+  padding: 3px;
+}
+
+.productCard > p{
+  padding: 3px;
+}
+
+.productCard > span{
+  padding: 3px;
+}
 
 .headlogo {
   display: flex;
@@ -86,10 +97,6 @@
 @media screen and (max-width: 600px) {
   .productCard > p {
     font-size: 1.7vmax;
-  }
-
-  .headlogo{
-    zoom:2.5;
   }
 
   .productCard > div {
