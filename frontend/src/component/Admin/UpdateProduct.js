@@ -40,10 +40,14 @@ const UpdateProduct = (match) => {
         "Laptop",
         "Footwear",
         "Bottom",
-        "Tops",
         "Attire",
-        "Camera",
-        "Smartphones"
+        "Smartphones",
+        "Assessories",
+        "Technology",
+        "Sports",
+        "Electronics",
+        "Decor",
+        "Art"
     ];
 
     useEffect(() => {
