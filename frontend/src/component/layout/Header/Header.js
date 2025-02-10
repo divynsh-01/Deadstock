@@ -34,27 +34,43 @@ const Navbar = () => {
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
               <NavLink 
-                className="nav-link" 
+                className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")} // Use className as a function
                 aria-current="page" 
                 to="/" 
-                activeClassName="active" // Automatically adds 'active' class
               >
                 Home
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/products" activeClassName="active">
+              <NavLink 
+                className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")}
+                to="/products"
+              >
                 Products
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/contact" activeClassName="active">
+              <NavLink 
+                className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")}
+                to="/contact"
+              >
                 Contact
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/about" activeClassName="active">
+              <NavLink 
+                className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")}
+                to="/about"
+              >
                 About
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink 
+                className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")}
+                to="/sell"
+              >
+                Sell
               </NavLink>
             </li>
           </ul>

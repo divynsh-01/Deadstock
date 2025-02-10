@@ -1,8 +1,28 @@
+/* Import slick-carousel styles */
+
 .divCont {
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center; /* Centers child elements horizontally */
   justify-content: center; /* Centers child elements vertically if needed */
+}
+
+.divCont2 {
+  flex: 0.45;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centers child elements horizontally */
+  justify-content: flex-start; /* Centers child elements vertically if needed */
+
+}
+
+.mainCont{
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start; /* Centers child elements horizontally */
+  justify-content: center;
+  margin-top: 30px;
 }
 
 .homeHeading {
@@ -19,17 +39,6 @@
   margin-bottom: 10px;
 }
 
-.productCard > img{
-  padding: 3px;
-}
-
-.productCard > p{
-  padding: 3px;
-}
-
-.productCard > span{
-  padding: 3px;
-}
 
 .headlogo {
   display: flex;
@@ -94,9 +103,44 @@
   transform: translateY(-1vmax);
 }
 
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.pagination button {
+  background-color: #ff6b6b;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  margin: 0 5px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.pagination button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.pagination span {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+
+
+
 @media screen and (max-width: 600px) {
   .productCard > p {
     font-size: 1.7vmax;
+  }
+
+  .headlogo{
+    zoom:2.5;
   }
 
   .productCard > div {
@@ -111,5 +155,32 @@
   .productCard > div > span {
     margin: 0 0.5vmax;
     font: 300 1vmax "Roboto";
+  }
+}
+.carousel-container {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.slick-slide {
+  display: flex;
+  justify-content: center;
+}
+
+.slick-prev, .slick-next {
+  background-color: rgba(0, 0, 0, 0.5); /* Customize the navigation buttons */
+  border-radius: 50%;
+  color: white;
+  z-index: 1;
+}
+
+.slick-prev:before, .slick-next:before {
+  font-size: 24px;
+  color: white;
+}
+
+@media screen and (max-width: 600px) {
+  .slick-prev, .slick-next {
+    font-size: 16px;
   }
 }

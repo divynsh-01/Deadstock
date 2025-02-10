@@ -6,22 +6,22 @@ import { Link } from "react-router-dom";
 import MetaData from "../layout/MetaData";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";  // Green check icon
+import CancelIcon from "@mui/icons-material/Cancel";  // Red cross icon
 import SideBar from "./SideBar";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { DELETE_PRODUCT_RESET } from "../../constants/productConstant";
 
 const ProductList = () => {
-
-  const navigate = useNavigate()
-
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { error, products = [] } = useSelector((state) => state.products);
-  const{error: deleteError, isDeleted} = useSelector((state)=>state.products)
+  const { error: deleteError, isDeleted } = useSelector((state) => state.deleteProduct);
 
-  const deleteProductHandler = (id)=>{
-    dispatch(deleteProduct(id))
-  }
+  const deleteProductHandler = (id) => {
+    dispatch(deleteProduct(id));
+  };
 
   useEffect(() => {
     if (error) {
@@ -29,20 +29,19 @@ const ProductList = () => {
       dispatch(clearErrors());
     }
 
-    if(deleteError){
-      toast.error(deleteError)
-      dispatch(clearErrors())
+    if (deleteError) {
+      toast.error(deleteError);
+      dispatch(clearErrors());
     }
 
-    if(isDeleted){
-      toast.success("Product Deleted Successfully")
-      navigate("/admin/dashboard")
-      dispatch({type: DELETE_PRODUCT_RESET})
+    if (isDeleted) {
+      toast.success("Product Deleted Successfully");
+      navigate("/admin/dashboard");
+      dispatch({ type: DELETE_PRODUCT_RESET });
     }
 
     dispatch(getAdminProduct());
   }, [dispatch, error, deleteError, navigate, isDeleted]);
-
 
   return (
     <>
@@ -59,6 +58,7 @@ const ProductList = () => {
                   <th>Name</th>
                   <th>Stock</th>
                   <th>Price</th>
+                  <th>Verified</th>
                   <th>Actions</th>
                 </tr>
               </thead>
@@ -69,6 +69,13 @@ const ProductList = () => {
                     <td>{product.name}</td>
                     <td>{product.Stock}</td>
                     <td>{product.price}</td>
+                    <td>
+                      {product.isVerified ? (
+                        <CheckCircleIcon style={{ color: "green" }} /> // Green check
+                      ) : (
+                        <CancelIcon style={{ color: "red" }} /> // Red cross
+                      )}
+                    </td>
                     <td>
                       <Link to={`/admin/product/${product._id}`}>
                         <EditIcon style={{ cursor: "pointer", marginRight: "8px" }} />

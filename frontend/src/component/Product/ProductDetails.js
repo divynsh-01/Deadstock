@@ -2,12 +2,11 @@ import React, { useEffect, useState } from 'react';
 import Carousel from 'react-material-ui-carousel';
 import './ProductDetails.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { getProductDetails, clearErrors, newReview } from '../../actions/productAction'; // Add clearErrors here
+import { getProductDetails, clearErrors, newReview } from '../../actions/productAction';
 import { useParams } from 'react-router-dom';
-// import ReactStars from "react-rating-stars-component";
 import ReviewCard from './ReviewCard.js';
 import Loader from '../layout/Loader/Loader.js';
-import { toast } from "react-toastify"; // Import toastify
+import { toast } from "react-toastify";
 import MetaData from '../layout/MetaData.js';
 import { addItemsToCart } from '../../actions/cartAction.js';
 import Dialog from '@mui/material/Dialog';
@@ -18,88 +17,77 @@ import Button from '@mui/material/Button';
 import { Rating } from '@mui/material';
 import { NEW_REVIEW_RESET } from '../../constants/productConstant.js';
 
-const ProductDetails = (match) => {
+const ProductDetails = () => {
   const { id } = useParams();
 
   const dispatch = useDispatch();
   const { product, loading, error } = useSelector((state) => state.productDetails);
-  const {success, error:reviewError} = useSelector((state)=> state.newReview)
+  const { success, error: reviewError } = useSelector((state) => state.newReview);
+
+
 
   useEffect(() => {
-    dispatch(getProductDetails(id)); // Fetch product details when component mounts
+    dispatch(getProductDetails(id));
   }, [dispatch, id]);
 
   useEffect(() => {
     if (error) {
-      toast.error(error, { position: "bottom-center" }); // Show error as toast notification
-      dispatch(clearErrors()); // Clear error after displaying it
+      toast.error(error, { position: "bottom-center" });
+      dispatch(clearErrors());
     }
-
     if (reviewError) {
-      toast.error(reviewError, { position: "bottom-center" }); // Show error as toast notification
-      dispatch(clearErrors()); // Clear error after displaying it
+      toast.error(reviewError, { position: "bottom-center" });
+      dispatch(clearErrors());
     }
-    if(success){
-      toast.success("Review Submitted Successfully")
-      dispatch({type: NEW_REVIEW_RESET})
+    if (success) {
+      toast.success("Review Submitted Successfully");
+      dispatch({ type: NEW_REVIEW_RESET });
     }
-  }, [error, dispatch, reviewError, success]); // Run whenever `error` changes
+  }, [error, dispatch, reviewError, success]);
 
-  const options = product && product.ratings !== undefined ? {
-    precision: 0.5,
-    readOnly: true,
-    value: product.ratings,
-  } : null;
-
-  const [quantity, setQuantity] = useState(1)
+  const [quantity, setQuantity] = useState(1);
 
   const increaseQuantity = () => {
-    if (product.Stock <= quantity) {
-      return;
-    }
-    const qty = quantity + 1;
-    setQuantity(qty)
-  }
+    if (product.Stock <= quantity) return;
+    setQuantity((prevQty) => prevQty + 1);
+  };
 
   const decreaseQuantity = () => {
-    if (quantity <= 1) {
-      return;
-    }
-    const qty = quantity - 1;
-    setQuantity(qty)
-  }
+    if (quantity <= 1) return;
+    setQuantity((prevQty) => prevQty - 1);
+  };
 
   const addToCartHandler = () => {
-    dispatch(addItemsToCart(id, quantity)); // Use 'id' from useParams
+    dispatch(addItemsToCart(id, quantity));
     toast.success("Item Added to Cart");
   };
 
-  const [open, setOpen] = useState(false)
-  const [rating, setRating] = useState(0)
-  const [comment, setComment] = useState("")
+  const [open, setOpen] = useState(false);
+  const [rating, setRating] = useState(0);
+  const [comment, setComment] = useState("");
 
-  const submitReviewToggle = () =>{
-    open ? setOpen(false) : setOpen(true)
-  }
+  const submitReviewToggle = () => setOpen(!open);
 
   const reviewSubmitHandler = () => {
     const myForm = new FormData();
     myForm.set("rating", rating);
     myForm.set("comment", comment);
-    myForm.set("productId", id); // Use `id` from `useParams` instead of `match.params.id`
+    myForm.set("productId", id);
     dispatch(newReview(myForm));
     setOpen(false);
   };
 
-
   return (
     <>
       {loading ? (
-        <Loader /> // Show loader while fetching product details
+        <Loader />
       ) : (
         <>
           <MetaData title={`${product.name} -- DeadStock`} />
-          <div className="ProductDetails">
+          <div
+            className="ProductDetails kam"
+            
+          >
             <div className="dv">
               <Carousel>
                 {product.images &&
@@ -121,11 +109,8 @@ const ProductDetails = (match) => {
               </div>
 
               <div className="detailsBlock-2">
-                <Rating {...options} />
-                <span className="detailsBlock-2-span">
-                  {" "}
-                  ({product.numOfReviews} Reviews)
-                </span>
+                <Rating value={product.ratings} readOnly precision={0.5} />
+                <span className="detailsBlock-2-span"> ({product.numOfReviews} Reviews)</span>
               </div>
 
               <div className="detailsBlock-3">
@@ -133,14 +118,18 @@ const ProductDetails = (match) => {
                 <div className="detailsBlock-3-1">
                   <div className="detailsBlock-3-1-1">
                     <button onClick={decreaseQuantity}>-</button>
-                    <input type='number' value={quantity} readOnly />
+                    <input type="number" value={quantity} readOnly />
                     <button onClick={increaseQuantity}>+</button>
                   </div>
-                  <button disabled={product.Stock < 1 ? true : false} onClick={addToCartHandler}>Add to Cart</button>
+                  <button
+                    disabled={product.Stock < 1}
+                    onClick={addToCartHandler}
+                  >
+                    Add to Cart
+                  </button>
                 </div>
-
                 <p>
-                  Status:
+                  Status:{" "}
                   <b className={product.Stock < 1 ? "redColor" : "greenColor"}>
                     {product.Stock < 1 ? "OutOfStock" : "InStock"}
                   </b>
@@ -157,25 +146,25 @@ const ProductDetails = (match) => {
 
           <h3 className="ReviewsHeading">REVIEWS</h3>
 
-          <Dialog
-            aria-labelledby='simple-dialog-title'
-            open={open}
-            onClose={submitReviewToggle}
-          >
+          <Dialog open={open} onClose={submitReviewToggle}>
             <DialogTitle>Submit Review</DialogTitle>
-            <DialogContent className="submitDialog">
-                  <Rating
-                    onChange={(e)=> setRating(e.target.value)}
-                    value={rating}
-                    size='large'
-                  />
-                  <textarea className='submitDialogTextArea' cols='30' rows='5' value={comment} onChange={(e)=>setComment(e.target.value)}></textarea>
+            <DialogContent>
+              <Rating
+                onChange={(e) => setRating(e.target.value)}
+                value={rating}
+                size="large"
+              />
+              <textarea
+                cols="30"
+                rows="5"
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
+              ></textarea>
             </DialogContent>
             <DialogActions>
-              <Button style={{color:"tomato"}}>Cancel</Button>
-              <Button style={{marginLeft: "0px"}} onClick={reviewSubmitHandler}>Submit</Button>
+              <Button onClick={submitReviewToggle}>Cancel</Button>
+              <Button onClick={reviewSubmitHandler}>Submit</Button>
             </DialogActions>
-
           </Dialog>
 
           {product.reviews && product.reviews[0] ? (
@@ -185,7 +174,7 @@ const ProductDetails = (match) => {
               ))}
             </div>
           ) : (
-            <p className='noReviews'>No reviews yet</p>
+            <p className="noReviews">No reviews yet</p>
           )}
         </>
       )}

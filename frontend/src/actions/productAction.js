@@ -5,29 +5,25 @@ import { ADMIN_PRODUCT_FAIL, ADMIN_PRODUCT_REQUEST,ADMIN_PRODUCT_SUCCESS, NEW_PR
 import { DELETE_PRODUCT_FAIL, DELETE_PRODUCT_REQUEST, DELETE_PRODUCT_SUCCESS, UPDATE_PRODUCT_FAIL, UPDATE_PRODUCT_REQUEST, UPDATE_PRODUCT_SUCCESS } from "../constants/productConstant";
 import { ALL_REVIEW_FAIL, ALL_REVIEW_REQUEST, ALL_REVIEW_SUCCESS, DELETE_REVIEW_FAIL, DELETE_REVIEW_REQUEST, DELETE_REVIEW_SUCCESS } from "../constants/productConstant";
 
-
-export const getProduct = (keyword="", currentPage=1, price = [0,100000], category, ratings=0)=> async(dispatch)=>{
+export const getProduct = () => async (dispatch) => {
     try {
-        dispatch({type: ALL_PRODUCT_REQUEST})
-        let link = `/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}`
+        dispatch({ type: ALL_PRODUCT_REQUEST });
 
-        if(category){
-            link = `/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&category=${category}&ratings[gte]=${ratings}`
-        }
+        const { data } = await axios.get("/api/v1/products"); // Get all products
 
-        const {data} = await axios.get(link)
         dispatch({
             type: ALL_PRODUCT_SUCCESS,
             payload: data
         });
-        
+
     } catch (error) {
         dispatch({
-            type:ALL_PRODUCT_FAIL,
-            payload:error.response.data.message
-        })
+            type: ALL_PRODUCT_FAIL,
+            payload: error.response.data.message
+        });
     }
-}
+};
+
 
 export const getAdminProduct = ()=> async(dispatch)=>{
     try {
@@ -64,6 +60,36 @@ export const getProductDetails = (id)=> async(dispatch)=>{
     }
 }
 
+export const getProductDetailsAndUserData = (id, userId) => async (dispatch) => {
+  try {
+    dispatch({ type: PRODUCT_DETAILS_REQUEST });
+
+    // Making both API calls
+    const productDetailsRequest = axios.get(`/api/v1/product/${id}`);
+    const userApiRequest = axios.post(`http://localhost:8080/${id}`, { userId }, {
+      headers: { "Content-Type": "application/json" }
+    });
+
+    // Use axios.all() to call both APIs simultaneously
+    const [productDetails, userApiResponse] = await axios.all([productDetailsRequest, userApiRequest]);
+
+    // Dispatch success action with product data
+    dispatch({
+      type: PRODUCT_DETAILS_SUCCESS,
+      payload: productDetails.data.product
+    });
+
+    // You can handle the response from the user API here if needed
+    console.log("User API Response:", userApiResponse.data);
+
+  } catch (error) {
+    dispatch({
+      type: PRODUCT_DETAILS_FAIL,
+      payload: error.response ? error.response.data.message : error.message
+    });
+  }
+};
+
 export const newReview = (reviewData)=> async(dispatch)=>{
     try {
         dispatch({type: NEW_REVIEW_REQUEST})
@@ -86,29 +112,27 @@ export const newReview = (reviewData)=> async(dispatch)=>{
     }
 }
 
-
-export const createProduct = (productData)=> async(dispatch)=>{
+export const createProduct = (productData) => async (dispatch) => {
     try {
-        dispatch({type: NEW_PRODUCT_REQUEST})
+            dispatch({ type: NEW_PRODUCT_REQUEST });
 
         const config = {
-            headers:{"Content-Type":"multipart/form-data"}
-        }
+            headers: { "Content-Type": "multipart/form-data" }
+        };
 
-        const {data} = await axios.post(`/api/v1/admin/product/new`,productData, config)
+        const { data } = await axios.post(`/api/v1/admin/product/new`, productData, config);
 
         dispatch({
             type: NEW_PRODUCT_SUCCESS,
             payload: data
-        })
+        });
     } catch (error) {
         dispatch({
-            type:NEW_PRODUCT_FAIL,
-            payload:error.response.data.message
-        })
+            type: NEW_PRODUCT_FAIL,
+            payload: error.response.data.message
+        });
     }
-}
-
+};
 
 export const updateProduct = (id, productData)=> async(dispatch)=>{
     try {

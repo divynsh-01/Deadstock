@@ -1,74 +1,80 @@
+/* General Styling */
 .ProductsHeading {
-    padding-left: 15px;
-    padding-right: 15px;
-    margin-top: 20px;
-    font-family: 'Poppins', sans-serif;
-    text-align: center;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-top: 20px;
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
 }
 
 .horizontal-rule {
-    width: 50%; /* Adjust this value to set the width of the line */
-    margin: 0 auto; /* Center the line */
-    border: 0;
-    border-top: 2px solid black; /* Change the color and thickness of the line */
-    margin-bottom: 20px; /* Adjust spacing below the line */
+  width: 50%; /* Adjust width */
+  margin: 0 auto; /* Center the line */
+  border: 0;
+  border-top: 2px solid black;
+  margin-bottom: 20px;
 }
 
-  
-  .products {
-    display: flex;
-    flex-wrap: wrap;
-    /* padding: 0 5vmax; */
-    justify-content: center;
-    min-height: 30vh;
-  }
-  
-  .paginationBoxx {
-    display: flex;
-    justify-content: center;
-    margin: 2vmax 0;
+.products {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  min-height: 30vh;
 }
 
-.page-item {
-    display: inline-block;
-    margin: 0 5px;
+/* Improved Pagination */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem 0;
+  font-family: 'Poppins', sans-serif;
 }
 
-.page-link {
-    font-family: 'Poppins', sans-serif;
-    font-size: 14px;
-    color: black;
-    padding: 8px 12px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    text-decoration: none;
-    transition: all 0.3s;
-}
-
-.page-link:hover {
-    background-color: #f1f1f1;
-    border-color: #aaa;
-    color: #333;
-}
-.pageItemActive {
-  background-color: #007bff; /* Highlighted blue background for active page */
-  border-color: #007bff;
-  font-weight: bold;
-  border-radius: 5px; /* Smooth border for better design */
-}
-
-.pageLinkActive {
-  background-color: rgb(98, 97, 97);
+.pnBtn {
+  background: linear-gradient(135deg, #333, #222);
   color: white;
-  text-decoration: none;
+  border: none;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: bold;
+  margin: 0 8px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s;
 }
 
-/* Add slider specific styles to ensure visibility */
-.filterBox {
-  margin: 25px;
-  width: 20vmax;
-  margin-top: 8%;
-  pointer-events: auto;
+.pnBtn:hover {
+  background: linear-gradient(135deg, #444, #333);
+}
+
+.pnBtn:disabled {
+  background: #999;
+  cursor: not-allowed;
+}
+
+.pagination span {
+  font-size: 14px;
+  font-weight: bold;
+  color: #444;
+}
+
+/* Active Page Styling */
+.pageItemActive {
+  background-color: #007bff;
+  color: white;
+  padding: 8px 14px;
+  border-radius: 5px;
+  font-weight: bold;
+  margin: 0 5px;
+  border: none;
+}
+
+/* Dropdown Filter Styling */
+.dropdown {
+  position: relative;
+  display: inline-block;
+  margin: 1%;
 }
 
 .dropbtn {
@@ -79,75 +85,69 @@
   border: none;
   cursor: pointer;
   min-width: 120px;
-}
-
-.dropdown {
-  position: absolute;
-  display: inline-block;
-  margin: 1%;
-  pointer-events: auto;
+  border-radius: 5px;
 }
 
 .dropdown-content {
   display: none;
   position: absolute;
   background-color: #f1f1f1;
-  min-width: 160px;
+  min-width: 180px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
   margin-top: 5px;
+  padding: 10px;
+  border-radius: 5px;
 }
 
-.dropdown.open .dropdown-content {
+.dropdown:hover .dropdown-content {
   display: block;
 }
 
-/* Slider visibility and interaction styles */
+/* Filter Box */
+.filterBox {
+  width: 200px;
+}
+
 .sliderWrapper {
   width: 100%;
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
-.paginationBoxx {
-  display: flex;
-  justify-content: center;
-  margin: 2vmax 0;
-}
-
+/* Categories */
 .categoryBox {
-  padding: 0%;
+  list-style: none;
+  padding: 0;
 }
 
 .category-link {
-  list-style: none;
-  color: rgba(0, 0, 0, 0.61);
+  color: rgba(0, 0, 0, 0.7);
   font: 400 0.8vmax "Roboto";
   margin: 0.4vmax 0;
   cursor: pointer;
   transition: all 0.5s;
 }
+
 .category-link:hover {
   color: tomato;
 }
 
+/* Ratings */
 .filterBox > fieldset {
-  border: 1px solid rgba(0, 0, 0, 0.329);
+  border: 1px solid rgba(0, 0, 0, 0.3);
 }
 
-
-.headlogo {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  zoom: 0.5;
-}
-
-
+/* Mobile Responsive */
 @media screen and (max-width: 600px) {
-    .headlogo{
-        zoom: 2.5 !important;
-    }
-    .category-link{
+  .pagination {
+    flex-direction: column;
+  }
+
+  .pnBtn {
+    margin: 5px 0;
+  }
+
+  .category-link {
     font-size: 13px;
     margin: 12px 0;
   }

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import "./NewProduct.css"
 import { useDispatch, useSelector } from 'react-redux'
-import { clearErrors, createProduct } from '../../actions/productAction'
+import { createProduct, clearErrors } from '../../actions/productAction'
 import { toast } from 'react-toastify'
 import { Button } from '@mui/material'
 import MetaData from '../layout/MetaData'
@@ -10,16 +9,13 @@ import DescriptionIcon from '@mui/icons-material/Description';
 import StorageIcon from '@mui/icons-material/Storage';
 import SpellcheckIcon from '@mui/icons-material/Spellcheck';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
-import SideBar from './SideBar'
 import { NEW_PRODUCT_RESET } from '../../constants/productConstant'
 import { useNavigate } from 'react-router-dom'
+import "./NormalSell.css"
 
-
-
-const NewProduct = () => {
+const BulkSell = () => {
 
     const navigate = useNavigate()
-
     const dispatch = useDispatch()
     const { loading, error, success } = useSelector((state) => state.newProduct)
 
@@ -54,31 +50,29 @@ const NewProduct = () => {
 
         if (success) {
             toast.success("Product Created Successfully")
-            navigate("/admin/dashboard")
+            navigate("/")
             dispatch({ type: NEW_PRODUCT_RESET })
         }
-
     }, [dispatch, error, navigate, success])
 
     const createProductSubmitHandler = (e) => {
-        e.preventDefault()
+        e.preventDefault();
 
-        const myForm = new FormData()
+        const myForm = new FormData();
 
-        myForm.set("name", name)
-        myForm.set("price", price)
-        myForm.set("description", description)
-        myForm.set("category", category)
-        myForm.set("Stock", Stock)
-        myForm.set("isVerified", true)
+        myForm.set("name", name);
+        myForm.set("price", price);
+        myForm.set("description", description);
+        myForm.set("category", category);
+        myForm.set("Stock", Stock);
+        myForm.set("isVerified", false);
 
         images.forEach((image) => {
-            myForm.append("images", image)
-        })
+            myForm.append("images", image);
+        });
 
-        dispatch(createProduct(myForm))
-
-    }
+        dispatch(createProduct(myForm));
+    };
 
     const createProductImageChange = (e) => {
         const files = Array.from(e.target.files)
@@ -99,15 +93,13 @@ const NewProduct = () => {
         })
     }
 
-
     return (
         <>
             <MetaData title='Create Product -- DeadStock' />
-            <div className="dashboard">
-                <SideBar />
-                <div className="newProductContainer">
-                    <form className='createProductForm' onSubmit={createProductSubmitHandler} encType='multipart/form-data'>
-                        <h1>Create Product</h1>
+            <div className="bulkSellDashboard">
+                <div className="bulkSellContainer">
+                    <form className='bulkSellForm' onSubmit={createProductSubmitHandler} encType='multipart/form-data'>
+                        <h1>Sell</h1>
                         <div>
                             <SpellcheckIcon />
                             <input type="text"
@@ -148,7 +140,6 @@ const NewProduct = () => {
                                     </option>
                                 ))}
                             </select>
-
                         </div>
 
                         <div>
@@ -160,21 +151,21 @@ const NewProduct = () => {
                             />
                         </div>
 
-                        <div id='createProductFormFile'>
+                        <div id='bulkSellFormFile'>
                             <input type="file" name="avatar" accept='image/*' multiple onChange={createProductImageChange} />
                         </div>
 
-                        <div id='createProductFormImage'>
+                        <div id='bulkSellFormImage'>
                             {imagesPreview.map((image, index) => (
                                 <img src={image} alt="Product Preview" key={index} />
                             ))}
                         </div>
 
                         <Button
-                            id='createProductBtn'
+                            id='bulkSellBtn'
                             type='submit'
                             disabled={loading ? true : false}>
-                            Create
+                            List Product
                         </Button>
 
                     </form>
@@ -184,4 +175,4 @@ const NewProduct = () => {
     )
 }
 
-export default NewProduct
+export default BulkSell;

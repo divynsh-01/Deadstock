@@ -61,7 +61,6 @@
 
 .detailsBlock-3-1 {
     display: flex;
-    flex-direction: column; /* Stack elements vertically */
     align-items: flex-start;
     gap: 1vmax; /* Add space between rows */
 }
@@ -294,6 +293,13 @@ button:hover {
         margin-left: 0; /* Remove left margin on mobile devices */
         margin-top: 10px; /* Keep the top margin */
     }
+
+    .ProductDetails{
+        flex-wrap: wrap !important;
+        flex-direction: column !important;
+    }
+
+
 }
 
 
@@ -301,6 +307,10 @@ button:hover {
 @media (max-width: 768px) {
     .MuiDialog-paper {
         width: 90vw; /* Ensure the dialog is almost full width on mobile */
+    }
+
+    .ProductDetails{
+        flex-direction: column;
     }
 
     .MuiDialogTitle-root {
@@ -319,10 +329,6 @@ button:hover {
     .MuiButton-root {
         width: 100%; /* Make buttons take up full width on mobile */
         margin-top: 1vmax;
-    }
-
-    .ProductDetails{
-        flex-wrap: wrap;
     }
 
 }

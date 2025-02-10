@@ -1,30 +1,39 @@
 import React from 'react';
 import "./Contact.css";
-import logoHead from "../../images/logoHead.png"
+import contactImage from "../../images/Customer.png"; // Add your contact image
 
 const Contact = () => {
     return (
-        <>
-            <div className="cc">
-                <div className="contact-container">
-                    <section id="logoHead">
-                        <div className="headlogo">
-                            <div className="logo">
-                                <img src={logoHead} style={{ maxWidth: "600px", height: "auto" }} alt="" />
-                            </div>
-                        </div>
-                    </section>
-                    <h2>Contact Us</h2>
+        <div className="contact-container">
+            <div className="contact-left">
+                <h2>Contact Us About <br /><span className="highlight">Dead Stock Marketplace</span></h2>
+                <p>
+                    We’d love to help you clear dead stock, optimize storage, and recover capital. 
+                    Here are a few ways to get in touch with our team.
+                </p>
 
-                    <div className="contact-details">
-                        <p><strong>Address:</strong> 123 Dead Stock Marketplace, Street Name, City, State, 12345</p>
-                        <p><strong>Email:</strong> support@deadstockmarketplace.com</p>
-                        <p><strong>Phone:</strong> (+91) 123-456-7890</p>
-                        <p><strong>Working Hours:</strong> Mon - Fri, 9:00 AM - 6:00 PM</p>
+                <div className="contact-options">
+                    <div className="contact-card">
+                        <i className="fas fa-phone"></i>
+                        <h3>Call us directly</h3>
+                        <p>+91 123-456-7890</p>
+                        <a href="tel:+911234567890">See more local numbers</a>
                     </div>
+
+                    <div className="contact-card">
+                        <i className="fas fa-comments"></i>
+                        <h3>Mail our team</h3>
+                        <p>support@deadstockmarketplace.com</p>
+                        <a href="tel:support@deadstockmarketplace.com">Mail us</a>
+                    </div>
+
                 </div>
             </div>
-        </>
+
+            <div className="contact-right">
+                <img src={contactImage} alt="Contact Support" />
+            </div>
+        </div>
     );
 };
 
