@@ -108,10 +108,11 @@
   justify-content: center;
   align-items: center;
   margin-top: 20px;
+  gap: 10px;
 }
 
 .pagination button {
-  background-color: #ff6b6b;
+  background-color: rgb(32, 31, 31);
   color: white;
   border: none;
   padding: 8px 15px;
@@ -180,6 +181,11 @@
 }
 
 @media screen and (max-width: 600px) {
+
+  .pagination{
+    width: 100%;
+  }
+
   .slick-prev, .slick-next {
     font-size: 16px;
   }
