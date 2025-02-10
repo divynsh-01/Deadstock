@@ -140,6 +140,14 @@
     font-size: 1.7vmax;
   }
 
+  .productCard{
+    padding: 0px !important;
+  }
+
+  .containere{
+    gap: 30px;
+  }
+
   .headlogo{
     zoom:2.5;
   }

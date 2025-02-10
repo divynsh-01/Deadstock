@@ -141,10 +141,15 @@
 @media screen and (max-width: 600px) {
   .pagination {
     flex-direction: column;
+    margin-top: 103px;
   }
 
   .pnBtn {
     margin: 5px 0;
+  }
+
+  .products{
+    gap: 30px;
   }
 
   .category-link {

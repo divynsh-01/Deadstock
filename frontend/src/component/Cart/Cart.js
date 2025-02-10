@@ -86,7 +86,7 @@ const Cart = () => {
                                 <button onClick={() => increaseQuantity(item.product, item.quantity, item.stock)}>+</button>
                             </div>
                             <div className="cartSubtotal">
-                                {`$${item.price * item.quantity}`}
+                                {`₹${item.price * item.quantity}`}
                             </div>
                         </div>
                     ))}

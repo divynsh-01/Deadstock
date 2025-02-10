@@ -41,3 +41,11 @@
     margin-left: 100px;
     zoom: 0.9;
 }
+
+
+@media screen and (max-width: 600px){
+    .micButton{
+        width: 100%;
+        margin: 0px;
+    }
+}
