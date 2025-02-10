@@ -28,6 +28,14 @@ productSchema = new mongoose.Schema({
             required:true
         }
     }],
+    isVerified: {
+        type: Boolean,
+        default: false
+    },
+    isBulk:{
+        type: Boolean,
+        default: false
+    },
     category:{
         type:String,
         required:[true,"Please Enter Product Category"]

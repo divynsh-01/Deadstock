@@ -20,6 +20,7 @@ exports.createProduct = catchAsyncErrors(async (req, res, next) => {
 
         const imagesLink = [];
 
+        // Upload images to cloudinary
         for (let i = 0; i < images.length; i++) {
             const result = await cloudinary.v2.uploader.upload(images[i], {
                 folder: "products",
@@ -31,11 +32,18 @@ exports.createProduct = catchAsyncErrors(async (req, res, next) => {
             });
         }
 
+        // Convert isVerified to boolean (check if it is a string and convert it)
+        req.body.isVerified = req.body.isVerified === "true";
+
         req.body.images = imagesLink;
         req.body.user = req.user.id;
+        req.body.isVerified = req.body.isVerified || false; // Default to false if not provided
+        req.body.isBulk = req.body.isBulk || false; // Default to false if not provided
 
+        // Create the product
         const product = await Product.create(req.body);
 
+        // Return the created product
         res.status(201).json({
             success: true,
             product,
@@ -45,31 +53,16 @@ exports.createProduct = catchAsyncErrors(async (req, res, next) => {
     }
 });
 
-// Get all products
-
+// Get all products without filtering or pagination
 exports.getAllProducts = catchAsyncErrors(async (req, res, next) => {
-    const resultPerPage = 8;
-
-    const apiFeature = new Apifeatures(Product.find(), req.query).search().filter();
-
-    const filteredProductsCount = await apiFeature.query.clone().countDocuments();
-
-    apiFeature.pagination(resultPerPage);
-
-    const products = await apiFeature.query;
-
-    const productCount = await Product.countDocuments();
+    const products = await Product.find(); // Fetch all products
 
     res.status(200).json({
         success: true,
-        products,
-        productCount,
-        resultPerPage,
-        filteredProductsCount,
-        paginationNeeded: filteredProductsCount > resultPerPage,
+        products, // Return all products
+        productCount: products.length, // Total count
     });
 });
-
 
 // GET ALL PDT -- ADMIN
 exports.getAdminProducts = catchAsyncErrors(async (req, res, next) => {
