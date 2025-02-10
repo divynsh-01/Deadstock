@@ -15,6 +15,7 @@
     "axios": "^1.7.9",
     "chart.js": "^4.4.7",
     "cra-template": "1.2.0",
+    "deadstock": "file:..",
     "lodash.debounce": "^4.0.8",
     "overlay-navbar": "^1.2.3",
     "react": "^18.3.1",
@@ -27,6 +28,7 @@
     "react-redux": "^9.2.0",
     "react-router-dom": "^6.28.1",
     "react-scripts": "5.0.1",
+    "react-speech-recognition": "^3.10.0",
     "react-toastify": "^11.0.2",
     "redux": "^5.0.1",
     "redux-thunk": "^3.1.0"
@@ -55,5 +57,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://172.16.89.241:4000"
+  "proxy": "http://172.18.228.57:4000"
 }
