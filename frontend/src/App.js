@@ -29,9 +29,9 @@ import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import OrderSuccess from './component/Cart/OrderSuccess.js';
 import MyOrders from "./component/Order/MyOrders.js";
-import OrderDetails from "./component/Order/OrderDetails.js";
-import DashBoard from "./component/Admin/DashBoard.js";
-import ProductList from "./component/Admin/ProductList.js";
+import OrderDetails from "./component/Order/OrderDetails.js"
+import DashBoard from "./component/Admin/DashBoard.js"
+import ProductList from "./component/Admin/ProductList.js"
 import NewProduct from './component/Admin/NewProduct.js';
 import UpdateProduct from './component/Admin/UpdateProduct.js';
 import OrderList from './component/Admin/OrderList.js';
@@ -39,31 +39,44 @@ import ProcessOrder from './component/Admin/ProcessOrder.js';
 import UsersList from './component/Admin/UsersList.js';
 import UpdateUser from './component/Admin/UpdateUser.js';
 import ProductReviews from './component/Admin/ProductReviews.js';
-import NotFound from './component/NotFound/NotFound.js';
-import Loader from './component/layout/Loader/Loader.js';
+import NotFound from './component/NotFound/NotFound.js'; 
+import NoProduct from './component/Product/NoProduct.js';
+import Sell from './component/Sell/Sell.js';
+import BulkSell from './component/Sell/BulkSell.js';
+import NormalSell from './component/Sell/NormalSell.js';
 
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
   const [stripeApiKey, setStripeApiKey] = useState("");
-  const [loading, setLoading] = useState(true);  // Added loading state
 
-  async function getStripeApiKey() {
-    const { data } = await axios.get("/api/v1/stripeapikey");
-    setStripeApiKey(data.stripeApiKey);
-    setLoading(false);  // Set loading to false after fetching the stripe key
-  }
+  // Function to get Stripe API key
+  const getStripeApiKey = async () => {
+    try {
+      const { data } = await axios.get("/api/v1/stripeapikey");
+      setStripeApiKey(data.stripeApiKey);
+    } catch (error) {
+      console.error("Failed to load Stripe API key", error);
+    }
+  };
 
+  // Only fetch user data and Stripe API key if the user is not authenticated
   useEffect(() => {
-    store.dispatch(loadUser());
-    getStripeApiKey();
-  }, []);
+    if (!isAuthenticated) {
+      store.dispatch(loadUser()); // Load user data only if not authenticated
+    }
+
+    // Load Stripe API key only after the user is authenticated
+    if (isAuthenticated) {
+      getStripeApiKey();
+    }
+  }, [isAuthenticated]); // Dependencies to re-trigger on authentication state changes
 
   return (
     <Router>
       <Header />
-
+      
       {isAuthenticated && <UserOptions user={user} />}
-
+      
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/product/:id" element={<ProductDetails />} />
@@ -71,23 +84,18 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/products/:keyword" element={<Products />} />
         <Route path="/search" element={<Search />} />
+        <Route path="/no-products" element={<NoProduct />} />
         <Route path="/login" element={<LoginSignUp />} />
         <Route path="/about" element={<AboutUs />} />
+        <Route path="/sell" element={<Sell />} />
+        <Route path="/bulksell" element={<BulkSell />} />
+        <Route path="/normalsell" element={<NormalSell />} />
         <Route path="/password/forgot" element={<ForgotPassword />} />
         <Route path="/password/reset/:token" element={<ResetPassword />} />
-
-        <Route
-          path="/accounts"
-          element={<ProtectedRoute component={Profile} />}
-        />
-        <Route
-          path="/me/update"
-          element={<ProtectedRoute component={UpdateProfile} />}
-        />
-        <Route
-          path="/password/update"
-          element={<ProtectedRoute component={UpdatePassword} />}
-        />
+          
+        <Route path="/accounts" element={<ProtectedRoute component={Profile} />} />
+        <Route path="/me/update" element={<ProtectedRoute component={UpdateProfile} />} />
+        <Route path="/password/update" element={<ProtectedRoute component={UpdatePassword} />} />
         <Route path="/cart" element={<ProtectedRoute component={Cart} />} />
         <Route path="/shipping" element={<ProtectedRoute component={Shipping} />} />
         <Route path="/order/confirm" element={<ProtectedRoute component={ConfirmOrder} />} />
@@ -103,7 +111,7 @@ function App() {
         <Route path="/admin/users" element={<ProtectedRoute isAdmin={true} component={UsersList} />} />
         <Route path="/admin/user/:id" element={<ProtectedRoute isAdmin={true} component={UpdateUser} />} />
         <Route path="/admin/reviews" element={<ProtectedRoute isAdmin={true} component={ProductReviews} />} />
-
+        
         {isAuthenticated && stripeApiKey && (
           <Route
             path="/process/payment"
@@ -115,10 +123,9 @@ function App() {
           />
         )}
 
-        {/* Show NotFound only after loading is complete */}
-        <Route path="*" element={loading ? <Loader/> : <NotFound />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
-
+      
       <Footer />
     </Router>
   );
